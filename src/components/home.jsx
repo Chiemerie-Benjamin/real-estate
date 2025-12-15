@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import Services from './services.jsx';
 import logo from '../assets/logo.png';
 
 import house1 from '../assets/house1.jpg';
@@ -133,10 +132,8 @@ const Home = () => {
           />
         ))}
       </div>
-      <services />
     </div>
   );
 };
 
 export default Home;
-

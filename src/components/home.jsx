@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import logo from '../assets/logo.png';
+import menu from '../assets/menu.png';
 
 import house1 from '../assets/house1.jpg';
 import house2 from '../assets/house2.jpg';
@@ -10,48 +11,45 @@ const images = [house1, house2, house3, house4];
 
 const Home = () => {
   const [activeBg, setActiveBg] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  // 🔁 CHANGE BACKGROUND EVERY 1 SECOND
+  // 🔁 BACKGROUND CHANGE EVERY 6 SECONDS
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveBg((prev) => (prev + 1) % images.length);
-    }, 6000); // 1 second
+    }, 6000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="relative w-screen">
-      {/* ================= BACKGROUNDS (STACKED) ================= */}
-      {/* ================= BACKGROUNDS (STACKED) ================= */}
+      {/* ================= BACKGROUNDS ================= */}
       {images.map((img, i) => (
         <div
           key={i}
           className={`
-      fixed inset-0 bg-cover bg-center
-      transition-all duration-[2000ms] ease-in-out
-      ${activeBg === i ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}
-    `}
-          style={{
-            backgroundImage: `url(${img})`,
-            transformOrigin: 'center',
-          }}
+            fixed inset-0 bg-cover bg-center
+            transition-all duration-[2000ms] ease-in-out
+            ${activeBg === i ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}
+          `}
+          style={{ backgroundImage: `url(${img})` }}
         />
       ))}
 
       {/* Overlay */}
       <div className="fixed inset-0 bg-black/60" />
 
-      {/* ================= FIXED CONTENT ================= */}
+      {/* ================= CONTENT ================= */}
       <div className="fixed inset-0 z-10 flex flex-col">
         {/* ================= NAVBAR ================= */}
-        <header className="mx-20 mt-6 bg-[#131110] h-16 flex items-center px-8">
+        <header className="mx-4 md:mx-20 mt-6 bg-[#131110] h-16 flex items-center px-6 md:px-8">
           <nav className="w-full flex items-center justify-between">
             {/* LOGO */}
-            <img src={logo} alt="Logo" className="h-8 w-auto cursor-pointer" />
+            <img src={logo} alt="Logo" className="h-8 w-auto" />
 
-            {/* NAV LINKS */}
-            <div className="flex items-center gap-10 text-[12px] text-gray-300">
+            {/* DESKTOP NAV */}
+            <div className="hidden md:flex items-center gap-10 text-[12px] text-gray-300">
               {['HOME', 'SERVICES', 'ABOUT'].map((item) => (
                 <a
                   key={item}
@@ -77,26 +75,61 @@ const Home = () => {
                 CONTACT US
               </span>
             </div>
+
+            {/* MOBILE MENU ICON */}
+            <button className="md:hidden" onClick={() => setMenuOpen(true)}>
+              <img src={menu} alt="Menu" className="h-6 w-6" />
+            </button>
           </nav>
         </header>
 
+        {/* ================= MOBILE MENU ================= */}
+        {menuOpen && (
+          <div className="fixed inset-0 z-50 bg-black flex flex-col">
+            <div className="flex items-center justify-between h-16 px-6">
+              <img src={logo} alt="Logo" className="h-8" />
+              <button
+                className="text-white text-3xl"
+                onClick={() => setMenuOpen(false)}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="flex-1 flex flex-col items-center justify-center gap-10 text-white text-[14px] tracking-widest">
+              {['HOME', 'SERVICES', 'ABOUT', 'CONTACT US'].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  onClick={() => setMenuOpen(false)}
+                  className="hover:text-[#9f7d32] transition"
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* ================= HERO TEXT ================= */}
         <div className="flex-1 flex items-center">
-          <div className="ml-40 max-w-3xl mt-24">
+          <div className="ml-6 md:ml-40 max-w-3xl mt-24">
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-10 h-1 bg-[rgb(159,125,50)]" />
+              <div className="w-10 h-1 bg-[#9f7d32]" />
               <p className="text-[12px] text-[#927337] tracking-widest">
                 PREMIUM PROPERTY MANAGEMENT
               </p>
             </div>
 
-            <h1 className="text-white text-[52px] font-light leading-tight">
+            <h1 className="text-white text-[44px] md:text-[52px] font-light">
               Seamless Operations
             </h1>
 
-            <h2 className="text-white text-[52px] font-light">For</h2>
+            <h2 className="text-white text-[44px] md:text-[52px] font-light">
+              For
+            </h2>
 
-            <h3 className="text-gray-400 text-[46px] italic font-light mt-1">
+            <h3 className="text-gray-400 text-[38px] md:text-[46px] italic font-light mt-1">
               Properties & Businesses.
             </h3>
 

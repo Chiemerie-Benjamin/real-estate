@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import logo from '../assets/logo.png';
 
 import house1 from '../assets/house1.jpg';
@@ -10,36 +10,32 @@ const images = [house1, house2, house3, house4];
 
 const Home = () => {
   const [activeBg, setActiveBg] = useState(0);
-  const sectionsRef = useRef([]);
 
+  // 🔁 CHANGE BACKGROUND EVERY 1 SECOND
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveBg(Number(entry.target.dataset.index));
-          }
-        });
-      },
-      { threshold: 0.5 },
-    );
+    const interval = setInterval(() => {
+      setActiveBg((prev) => (prev + 1) % images.length);
+    }, 6000); // 1 second
 
-    sectionsRef.current.forEach((el) => el && observer.observe(el));
-    return () => observer.disconnect();
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className="relative w-screen">
       {/* ================= BACKGROUNDS (STACKED) ================= */}
+      {/* ================= BACKGROUNDS (STACKED) ================= */}
       {images.map((img, i) => (
         <div
           key={i}
           className={`
-            fixed inset-0 bg-cover bg-center
-            transition-opacity duration-700
-            ${activeBg === i ? 'opacity-100' : 'opacity-0'}
-          `}
-          style={{ backgroundImage: `url(${img})` }}
+      fixed inset-0 bg-cover bg-center
+      transition-all duration-[2000ms] ease-in-out
+      ${activeBg === i ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}
+    `}
+          style={{
+            backgroundImage: `url(${img})`,
+            transformOrigin: 'center',
+          }}
         />
       ))}
 
@@ -87,9 +83,8 @@ const Home = () => {
         {/* ================= HERO TEXT ================= */}
         <div className="flex-1 flex items-center">
           <div className="ml-40 max-w-3xl mt-24">
-            {/* Subtitle */}
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-10  h-1 bg-[#9f7d32]" />
+              <div className="w-10 h-1 bg-[rgb(159,125,50)]" />
               <p className="text-[12px] text-[#927337] tracking-widest">
                 PREMIUM PROPERTY MANAGEMENT
               </p>
@@ -119,18 +114,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* ================= SCROLL TRIGGERS ================= */}
-      <div>
-        {images.map((_, i) => (
-          <div
-            key={i}
-            ref={(el) => (sectionsRef.current[i] = el)}
-            data-index={i}
-            className="h-screen"
-          />
-        ))}
       </div>
     </div>
   );

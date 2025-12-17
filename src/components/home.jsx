@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import logo from '../assets/logo.png';
-import menu from '../assets/menu.png';
+import menu from '../assets/menu1.png';
 
 import house1 from '../assets/house1.jpg';
 import house2 from '../assets/house2.jpg';

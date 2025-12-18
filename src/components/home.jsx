@@ -67,7 +67,6 @@ const Home = () => {
           `}
         >
           <nav className="w-full flex items-center justify-between">
-            {/* LOGO */}
             <img src={logo} alt="Logo" className="h-8 w-auto" />
 
             {/* DESKTOP NAV */}
@@ -120,7 +119,6 @@ const Home = () => {
             }
           `}
         >
-          {/* TOP */}
           <div className="flex items-center justify-between h-16 px-6 border-b border-white/10">
             <img src={logo} alt="Logo" className="h-8" />
             <button
@@ -131,7 +129,6 @@ const Home = () => {
             </button>
           </div>
 
-          {/* LINKS */}
           <div className="px-8 pt-12 space-y-6 text-white text-[18px] font-light">
             {['Home', 'Services', 'About', 'Contact'].map((item) => (
               <div key={item} className="border-b border-white/10 pb-4">
@@ -146,7 +143,6 @@ const Home = () => {
             ))}
           </div>
 
-          {/* FOOTER */}
           <div className="absolute bottom-10 px-8 text-sm">
             <p className="text-[#9f7d32] uppercase tracking-widest text-[11px] mb-2">
               Inquiries
@@ -157,30 +153,26 @@ const Home = () => {
           </div>
         </div>
 
-        {/* ================= HERO ================= */}
-        <div className="flex-1 flex items-center">
-          <div className="ml-6 md:ml-40 max-w-3xl mt-24">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-10 h-1 bg-[#9f7d32]" />
-              <p className="text-[12px] text-[#927337] tracking-widest">
+        {/* ================= HERO (MOBILE MATCHED) ================= */}
+        <div className="flex-1 flex items-start md:flex md:items-center">
+          <div className="ml-6 md:ml-40 mt-32 md:mt-24 max-w-[92%] md:max-w-3xl">
+            <div className="flex items-center gap-4 mb-3 md:mb-4">
+              <div className="w-8 md:w-10 h-[2px] bg-[#9f7d32]" />
+              <p className="text-[10px] md:text-[12px] text-[#927337] tracking-[0.25em]">
                 PREMIUM PROPERTY MANAGEMENT
               </p>
             </div>
 
-            <h1 className="text-white text-[44px] md:text-[52px] font-light">
-              Seamless Operations
+            <h1 className="text-white text-[34px] md:text-[52px] leading-[1.15] md:leading-tight font-light">
+              Seamless Operations for
             </h1>
 
-            <h2 className="text-white text-[44px] md:text-[52px] font-light">
-              For
+            <h2 className="text-gray-300 text-[30px] md:text-[46px] italic font-light leading-[1.2] mt-1 font-[Cormorant_Garamond, serif]">
+              Properties & Businesses.
             </h2>
 
-            <h3 className="text-gray-400 text-[38px] md:text-[46px] italic font-light mt-1">
-              Properties & Businesses.
-            </h3>
-
-            <div className="mt-10">
-              <button className="px-16 py-4 text-[11px] uppercase tracking-[0.3em] text-white border border-white/20 hover:border-white hover:bg-white/5 transition">
+            <div className="mt-8 md:mt-10">
+              <button className="px-12 md:px-16 py-3 md:py-4 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white border border-white/20 hover:border-white hover:bg-white/5 transition">
                 Start Your Journey
               </button>
             </div>

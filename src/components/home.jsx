@@ -12,15 +12,31 @@ const images = [house1, house2, house3, house4];
 const Home = () => {
   const [activeBg, setActiveBg] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [showNav, setShowNav] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
-  // 🔁 BACKGROUND CHANGE EVERY 6 SECONDS
+  /* 🔁 BACKGROUND CHANGE */
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveBg((prev) => (prev + 1) % images.length);
     }, 6000);
-
     return () => clearInterval(interval);
   }, []);
+
+  /* 📱 HIDE / SHOW NAV ON SCROLL */
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY && window.scrollY > 80) {
+        setShowNav(false);
+      } else {
+        setShowNav(true);
+      }
+      setLastScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
     <div className="relative w-screen">
@@ -43,7 +59,13 @@ const Home = () => {
       {/* ================= CONTENT ================= */}
       <div className="fixed inset-0 z-10 flex flex-col">
         {/* ================= NAVBAR ================= */}
-        <header className="mx-4 md:mx-20 mt-6 bg-[#131110] h-16 flex items-center px-6 md:px-8">
+        <header
+          className={`
+            mx-4 md:mx-20 mt-6 bg-[#131110] h-16 px-6 md:px-8
+            flex items-center transition-transform duration-500
+            ${showNav ? 'translate-y-0' : '-translate-y-24'}
+          `}
+        >
           <nav className="w-full flex items-center justify-between">
             {/* LOGO */}
             <img src={logo} alt="Logo" className="h-8 w-auto" />
@@ -55,7 +77,7 @@ const Home = () => {
                   key={item}
                   href="#"
                   className="
-                    relative pb-1 tracking-widest
+                    relative pb-1 tracking-widest cursor-pointer
                     hover:text-white transition
                     after:content-['']
                     after:absolute after:left-0 after:-bottom-1
@@ -77,41 +99,65 @@ const Home = () => {
             </div>
 
             {/* MOBILE MENU ICON */}
-            <button className="md:hidden" onClick={() => setMenuOpen(true)}>
+            <button
+              className="md:hidden cursor-pointer transition hover:opacity-80"
+              onClick={() => setMenuOpen(true)}
+            >
               <img src={menu} alt="Menu" className="h-6 w-6" />
             </button>
           </nav>
         </header>
 
         {/* ================= MOBILE MENU ================= */}
-        {menuOpen && (
-          <div className="fixed inset-0 z-50 bg-black flex flex-col">
-            <div className="flex items-center justify-between h-16 px-6">
-              <img src={logo} alt="Logo" className="h-8" />
-              <button
-                className="text-white text-3xl"
-                onClick={() => setMenuOpen(false)}
-              >
-                ×
-              </button>
-            </div>
+        <div
+          className={`
+            fixed inset-0 z-50 bg-black
+            transition-all duration-500 ease-in-out
+            ${
+              menuOpen
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 -translate-y-10 pointer-events-none'
+            }
+          `}
+        >
+          {/* TOP */}
+          <div className="flex items-center justify-between h-16 px-6 border-b border-white/10">
+            <img src={logo} alt="Logo" className="h-8" />
+            <button
+              className="text-white text-3xl cursor-pointer hover:text-gray-400 transition"
+              onClick={() => setMenuOpen(false)}
+            >
+              ×
+            </button>
+          </div>
 
-            <div className="flex-1 flex flex-col items-center justify-center gap-10 text-white text-[14px] tracking-widest">
-              {['HOME', 'SERVICES', 'ABOUT', 'CONTACT US'].map((item) => (
+          {/* LINKS */}
+          <div className="px-8 pt-12 space-y-6 text-white text-[18px] font-light">
+            {['Home', 'Services', 'About', 'Contact'].map((item) => (
+              <div key={item} className="border-b border-white/10 pb-4">
                 <a
-                  key={item}
                   href="#"
                   onClick={() => setMenuOpen(false)}
-                  className="hover:text-[#9f7d32] transition"
+                  className="block hover:text-[#9f7d32] transition cursor-pointer"
                 >
                   {item}
                 </a>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        )}
 
-        {/* ================= HERO TEXT ================= */}
+          {/* FOOTER */}
+          <div className="absolute bottom-10 px-8 text-sm">
+            <p className="text-[#9f7d32] uppercase tracking-widest text-[11px] mb-2">
+              Inquiries
+            </p>
+            <p className="text-white/80 text-[13px]">
+              thedailycohostltd@gmail.com
+            </p>
+          </div>
+        </div>
+
+        {/* ================= HERO ================= */}
         <div className="flex-1 flex items-center">
           <div className="ml-6 md:ml-40 max-w-3xl mt-24">
             <div className="flex items-center gap-4 mb-4">
@@ -134,14 +180,7 @@ const Home = () => {
             </h3>
 
             <div className="mt-10">
-              <button
-                className="
-                  px-16 py-4 text-[11px] uppercase tracking-[0.3em]
-                  text-white border border-white/20
-                  hover:border-white hover:bg-white/5
-                  transition
-                "
-              >
+              <button className="px-16 py-4 text-[11px] uppercase tracking-[0.3em] text-white border border-white/20 hover:border-white hover:bg-white/5 transition">
                 Start Your Journey
               </button>
             </div>

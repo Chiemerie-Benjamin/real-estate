@@ -33,7 +33,6 @@ const Home = () => {
       }
       setLastScrollY(window.scrollY);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
@@ -64,19 +63,20 @@ const Home = () => {
             mx-4 md:mx-20 mt-6 bg-[#131110] h-16 px-6 md:px-8
             flex items-center transition-transform duration-500
             ${showNav ? 'translate-y-0' : '-translate-y-24'}
+            font-outfit
           `}
         >
           <nav className="w-full flex items-center justify-between">
             <img src={logo} alt="Logo" className="h-8 w-auto" />
 
             {/* DESKTOP NAV */}
-            <div className="hidden md:flex items-center gap-10 text-[12px] text-gray-300">
+            <div className="hidden md:flex items-center gap-10 text-[12px] text-gray-300 tracking-widest">
               {['HOME', 'SERVICES', 'ABOUT'].map((item) => (
                 <a
                   key={item}
                   href="#"
                   className="
-                    relative pb-1 tracking-widest cursor-pointer
+                    relative pb-1 cursor-pointer
                     hover:text-white transition
                     after:content-['']
                     after:absolute after:left-0 after:-bottom-1
@@ -110,7 +110,7 @@ const Home = () => {
         {/* ================= MOBILE MENU ================= */}
         <div
           className={`
-            fixed inset-0 z-50 bg-black
+            fixed inset-0 z-50 bg-black font-outfit
             transition-all duration-500 ease-in-out
             ${
               menuOpen
@@ -120,7 +120,7 @@ const Home = () => {
           `}
         >
           <div className="flex items-center justify-between h-16 px-6 border-b border-white/10">
-            <img src={logo} alt="Logo" className="h-8" />
+            <img src={logo} alt="Logoوعية" className="h-8" />
             <button
               className="text-white text-3xl cursor-pointer hover:text-gray-400 transition"
               onClick={() => setMenuOpen(false)}
@@ -153,26 +153,32 @@ const Home = () => {
           </div>
         </div>
 
-        {/* ================= HERO (MOBILE MATCHED) ================= */}
-        <div className="flex-1 flex items-start md:flex md:items-center">
-          <div className="ml-6 md:ml-40 mt-32 md:mt-24 max-w-[92%] md:max-w-3xl">
-            <div className="flex items-center gap-4 mb-3 md:mb-4">
+        {/* ================= HERO ================= */}
+        <div className="flex-1 flex items-start md:items-center">
+          <div className="ml-6 md:ml-40 pt-[38vh] md:pt-0 max-w-[92%] md:max-w-3xl">
+            {/* PREMIUM */}
+            <div className="flex items-center gap-4 mb-3 ">
               <div className="w-8 md:w-10 h-[2px] bg-[#9f7d32]" />
               <p className="text-[10px] md:text-[12px] text-[#927337] tracking-[0.25em]">
                 PREMIUM PROPERTY MANAGEMENT
               </p>
             </div>
 
-            <h1 className="text-white text-[34px] md:text-[52px] leading-[1.15] md:leading-tight font-light">
-              Seamless Operations for
+            {/* HERO TEXT */}
+            <h1 className="text-white text-[34px] md:text-[52px] leading-[1.1] font-light font-[Commorant_Garamond,serif]">
+              Seamless Operations
             </h1>
 
-            <h2 className="text-gray-300 text-[30px] md:text-[46px] italic font-light leading-[1.2] mt-1 font-[Cormorant_Garamond, serif]">
-              Properties & Businesses.
+            <h2 className="text-white text-[34px] md:text-[52px] font-light leading-[1.1]">
+              For
             </h2>
 
-            <div className="mt-8 md:mt-10">
-              <button className="px-12 md:px-16 py-3 md:py-4 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white border border-white/20 hover:border-white hover:bg-white/5 transition">
+            <h3 className="text-gray-300 text-[30px] md:text-[46px] italic font-light leading-[1.2] mt-1">
+              Properties <span className="not-italic">&</span> Businesses.
+            </h3>
+
+            <div className="mt-8">
+              <button className="px-12 md:px-16 py-3 md:py-4 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white border border-white/20 hover:border-white hover:bg-white/5 transition font-outfit">
                 Start Your Journey
               </button>
             </div>

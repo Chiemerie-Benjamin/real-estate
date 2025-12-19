@@ -6,7 +6,6 @@ import house1 from '../assets/house1.jpg';
 import house2 from '../assets/house2.jpg';
 import house3 from '../assets/house3.jpg';
 import house4 from '../assets/house4.jpg';
-
 const images = [house1, house2, house3, house4];
 
 const Home = () => {
@@ -165,11 +164,11 @@ const Home = () => {
             </div>
 
             {/* HERO TEXT */}
-            <h1 className="text-white text-[34px] md:text-[52px] leading-[1.1] font-light font-[Commorant_Garamond,serif]">
+            <h1 className="text-white text-[34px] md:text-[52px] leading-[1.1]  font-[Cormorant Garamond]">
               Seamless Operations
             </h1>
 
-            <h2 className="text-white text-[34px] md:text-[52px] font-light leading-[1.1]">
+            <h2 className="text-white text-[34px] md:text-[52px] font-light leading-[1.1] font-[Cormorant Garamond]">
               For
             </h2>
 
@@ -178,12 +177,22 @@ const Home = () => {
             </h3>
 
             <div className="mt-8">
-              <button className="px-12 md:px-16 py-3 md:py-4 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white border border-white/20 hover:border-white hover:bg-white/5 transition font-outfit">
+              <button
+                className="px-12 md:px-16 py-3 md:py-4 text-[10px] md:text-[11px] uppercase tracking-[0.3em] text-white border
+               border-white/20 hover:border-white hover:bg-white/5 transition font-outfit"
+              >
                 Start Your Journey
               </button>
             </div>
           </div>
         </div>
+        <section>
+          <div className=''>
+            <h1>
+              Curated Spaces
+            </h1>
+          </div>
+        </section>
       </div>
     </div>
   );

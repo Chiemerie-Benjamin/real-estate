@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import logo from '../assets/logo.png';
 import menu from '../assets/menu1.png';
 
-import house1 from '../assets/house1.jpg';
+import house1 from '../assets/house3.jpg';
 import house2 from '../assets/house2.jpg';
-import house3 from '../assets/house3.jpg';
+import house3 from '../assets/house1.jpg';
 import house4 from '../assets/house4.jpg';
 const images = [house1, house2, house3, house4];
 
